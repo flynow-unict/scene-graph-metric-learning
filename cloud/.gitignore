@@ -1,0 +1,12 @@
+# Ignora file Markdown
+*.md
+
+# Ignora log
+*.log
+
+# Ignora file di grandi dimensioni
+project-images.tar
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup

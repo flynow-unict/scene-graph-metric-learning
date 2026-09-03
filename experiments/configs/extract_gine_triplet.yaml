@@ -1,0 +1,6 @@
+# Estrazione degli embedding di gallery e queries dal checkpoint GINE + Triplet.
+# Lo split si sceglie da riga di comando (--split test_gallery | test_queries).
+ckpt: data/models/fullset/checkpoints/gcn_encoder_gine_triplet.pth
+split: test_gallery
+batch_size: 128
+out: data/models/fullset/semantic_web/gcn/gcn_gine_triplet_test_gallery.pt

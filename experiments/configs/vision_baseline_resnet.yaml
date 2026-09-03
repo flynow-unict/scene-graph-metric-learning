@@ -1,0 +1,7 @@
+# Baseline puramente visiva: ResNet50 pretrained e congelata sui pixel grezzi.
+encoder: resnet
+split: test_gallery
+images_dir: data/images/fullset/VectorDB
+batch_size: 64
+workers: 4
+out: data/models/fullset/vision_baselines/resnet_test_gallery.pt

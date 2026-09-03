@@ -1,0 +1,111 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: local_postgres
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db_schema:/docker-entrypoint-initdb.d
+    networks:
+      - cloud_network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    networks:
+      - cloud_network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
+      - "1${RABBITMQ_PORT}:1${RABBITMQ_PORT}"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    networks:
+      - cloud_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: local_backend
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+    networks:
+      - cloud_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: local_frontend
+    restart: on-failure
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - cloud_network
+
+  worker:
+    build:
+      context: ../
+      dockerfile: cloud/workerAI/Dockerfile
+    container_name: local_worker
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=${RABBITMQ_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - REDIS_HOST=redis
+      - REDIS_PORT=${REDIS_PORT}
+    volumes:
+      - ../data:/app/data
+    depends_on:
+      - rabbitmq
+      - postgres
+      - redis
+    networks:
+      - cloud_network
+
+volumes:
+  postgres_data:
+
+networks:
+  cloud_network:
+    driver: bridge

@@ -1,0 +1,17 @@
+# Baseline del confronto: solo topologia del grafo, loss NT-Xent.
+# SAGEConv ignora gli embedding delle relazioni, quindi misura quanto si ottiene
+# dalla sola struttura, senza informazione relazionale.
+data: data/sceneGraph/fullset/semantic/embedded/train_scene_graphs.pt
+conv: sage
+loss: ntxent
+positives: mixed
+epochs: 300
+batch_size: 128
+lr: 0.001
+temperature: 0.2
+dropout: 0.3
+pool: mean
+min_sim: 0.15
+pos_k: 5
+sem_veto: 0.55
+out: data/models/fullset/checkpoints/gcn_encoder_sage.pth

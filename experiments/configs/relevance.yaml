@@ -1,0 +1,12 @@
+# Ground truth di rilevanza query->gallery, calcolata con la stessa metrica usata
+# per minare i positivi durante il training (src/evaluation/scene_similarity.py).
+queries: data/sceneGraph/fullset/semantic/embedded/test_queries_scene_graphs.pt
+gallery: data/sceneGraph/fullset/semantic/embedded/test_gallery_scene_graphs.pt
+out: data/models/fullset/semantic_web/relevance_test.pt
+mode: mixed
+alpha: 0.5
+min_sim: 0.15
+sem_veto: 0.55
+sim_strong: 0.30
+min_triples: 0
+bin_threshold: 0.15

@@ -1,0 +1,2419 @@
+@prefix img: <http://progetto-dl-sw.org/images/> .
+@prefix obj: <http://progetto-dl-sw.org/objects/> .
+@prefix ont: <http://progetto-dl-sw.org/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.w3.org/2002/07/owl#> .
+
+[ rdf:type owl:Ontology
+ ] .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://progetto-dl-sw.org/ontology#above
+ont:above rdf:type owl:ObjectProperty ;
+          owl:inverseOf ont:below ,
+                        ont:under ;
+          rdf:type owl:AsymmetricProperty ,
+                   owl:TransitiveProperty ,
+                   owl:IrreflexiveProperty ;
+          owl:propertyChainAxiom ( ont:lying_on
+                                   ont:on
+                                 ) ,
+                                 ( ont:parked_on
+                                   ont:on
+                                 ) ,
+                                 ( ont:sitting_on
+                                   ont:on
+                                 ) ,
+                                 ( ont:standing_on
+                                   ont:on
+                                 ) ,
+                                 ( ont:walking_on
+                                   ont:on
+                                 ) .
+
+
+###  http://progetto-dl-sw.org/ontology#around
+ont:around rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf ont:near ;
+           rdf:type owl:SymmetricProperty ,
+                    owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#at
+ont:at rdf:type owl:ObjectProperty ,
+                owl:AsymmetricProperty ,
+                owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#behind
+ont:behind rdf:type owl:ObjectProperty ;
+           owl:inverseOf ont:in_front_of ;
+           rdf:type owl:AsymmetricProperty ,
+                    owl:TransitiveProperty ,
+                    owl:IrreflexiveProperty ;
+           owl:propertyChainAxiom ( ont:in
+                                    ont:behind
+                                  ) ,
+                                  ( ont:on
+                                    ont:behind
+                                  ) .
+
+
+###  http://progetto-dl-sw.org/ontology#below
+ont:below rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:TransitiveProperty ,
+                   owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#beside
+ont:beside rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf ont:near ;
+           rdf:type owl:SymmetricProperty ,
+                    owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#by
+ont:by rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf ont:near ;
+       rdf:type owl:SymmetricProperty ,
+                owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#carrying
+ont:carrying rdf:type owl:ObjectProperty ,
+                      owl:AsymmetricProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#contain
+ont:contain rdf:type owl:ObjectProperty ;
+            owl:inverseOf ont:in ;
+            rdf:type owl:AsymmetricProperty ,
+                     owl:TransitiveProperty ,
+                     owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#covered_by
+ont:covered_by rdf:type owl:ObjectProperty ;
+               owl:inverseOf ont:covering ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:TransitiveProperty ,
+                        owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#covered_in
+ont:covered_in rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:covered_by ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               owl:propertyChainAxiom ( ont:wearing
+                                        ont:covered_in
+                                      ) .
+
+
+###  http://progetto-dl-sw.org/ontology#covered_with
+ont:covered_with rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf ont:covered_by ;
+                 rdf:type owl:AsymmetricProperty ,
+                          owl:IrreflexiveProperty ;
+                 owl:propertyChainAxiom ( ont:wearing
+                                          ont:covered_with
+                                        ) .
+
+
+###  http://progetto-dl-sw.org/ontology#covering
+ont:covering rdf:type owl:ObjectProperty ,
+                      owl:AsymmetricProperty ,
+                      owl:TransitiveProperty ,
+                      owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#crossing
+ont:crossing rdf:type owl:ObjectProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] ;
+             rdfs:range <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://progetto-dl-sw.org/ontology#driving_on
+ont:driving_on rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:on ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain <http://example.invalid/ontologies/ont.owl#Vehicles> ;
+               rdfs:range <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://progetto-dl-sw.org/ontology#eating
+ont:eating rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty ,
+                    owl:IrreflexiveProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+           rdfs:range <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#filled_with
+ont:filled_with rdf:type owl:ObjectProperty ,
+                         owl:AsymmetricProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain <http://example.invalid/ontologies/ont.owl#InanimateObject> ;
+                rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#InanimateObject>
+                                            <http://example.invalid/ontologies/ont.owl#Substance>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#flying
+ont:flying rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty ,
+                    owl:IrreflexiveProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#flying_in
+ont:flying_in rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ont:in ;
+              rdf:type owl:AsymmetricProperty ,
+                       owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#full_of
+ont:full_of rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain <http://example.invalid/ontologies/ont.owl#InanimateObject> ;
+            rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#InanimateObject>
+                                            <http://example.invalid/ontologies/ont.owl#Substance>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#hanging_from
+ont:hanging_from rdf:type owl:ObjectProperty ,
+                          owl:AsymmetricProperty ,
+                          owl:TransitiveProperty ,
+                          owl:IrreflexiveProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                              )
+                                ] ;
+                 rdfs:range <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://progetto-dl-sw.org/ontology#hanging_on
+ont:hanging_on rdf:type owl:ObjectProperty ,
+                        owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                              )
+                                ] ;
+               rdfs:range <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://progetto-dl-sw.org/ontology#hitting
+ont:hitting rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf ont:touching ;
+            rdf:type owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#SportsEquipment>
+                                              )
+                                ] ;
+            rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#holding
+ont:holding rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#in
+ont:in rdf:type owl:ObjectProperty ,
+                owl:AsymmetricProperty ,
+                owl:TransitiveProperty ,
+                owl:IrreflexiveProperty ;
+       owl:propertyChainAxiom ( ont:flying_in
+                                ont:in
+                              ) ,
+                              ( ont:lying_on
+                                ont:in
+                              ) ,
+                              ( ont:parked_on
+                                ont:in
+                              ) ,
+                              ( ont:sitting_on
+                                ont:in
+                              ) ,
+                              ( ont:standing_on
+                                ont:in
+                              ) ,
+                              ( ont:walking_in
+                                ont:in
+                              ) .
+
+
+###  http://progetto-dl-sw.org/ontology#in_front_of
+ont:in_front_of rdf:type owl:ObjectProperty ,
+                         owl:AsymmetricProperty ,
+                         owl:TransitiveProperty ,
+                         owl:IrreflexiveProperty ;
+                owl:propertyChainAxiom ( ont:in
+                                         ont:in_front_of
+                                       ) ,
+                                       ( ont:on
+                                         ont:in_front_of
+                                       ) .
+
+
+###  http://progetto-dl-sw.org/ontology#inside
+ont:inside rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf ont:in ;
+           rdf:type owl:AsymmetricProperty ,
+                    owl:TransitiveProperty ,
+                    owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#leaning_on
+ont:leaning_on rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:touching ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure>
+                                            <http://example.invalid/ontologies/ont.owl#FacilityElement>
+                                            <http://example.invalid/ontologies/ont.owl#Furniture>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#looking_at
+ont:looking_at rdf:type owl:ObjectProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               owl:propertyChainAxiom ( ont:riding
+                                        ont:in_front_of
+                                      ) ,
+                                      ( ont:riding_on
+                                        ont:in_front_of
+                                      ) .
+
+
+###  http://progetto-dl-sw.org/ontology#lying_in
+ont:lying_in rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf ont:in ;
+             rdf:type owl:AsymmetricProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+             rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#lying_on
+ont:lying_on rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf ont:on ;
+             rdf:type owl:AsymmetricProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+             rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#near
+ont:near rdf:type owl:ObjectProperty ,
+                  owl:SymmetricProperty ,
+                  owl:IrreflexiveProperty ;
+         owl:propertyChainAxiom ( ont:in
+                                  ont:near
+                                ) ,
+                                ( ont:on
+                                  ont:near
+                                ) .
+
+
+###  http://progetto-dl-sw.org/ontology#next_to
+ont:next_to rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf ont:near ;
+            rdf:type owl:SymmetricProperty ,
+                     owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#of
+ont:of rdf:type owl:ObjectProperty ,
+                owl:AsymmetricProperty ,
+                owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#on
+ont:on rdf:type owl:ObjectProperty ,
+                owl:AsymmetricProperty ,
+                owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#on_the_back_of
+ont:on_the_back_of rdf:type owl:ObjectProperty ;
+                   owl:inverseOf ont:on_the_front_of ;
+                   rdf:type owl:AsymmetricProperty ,
+                            owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#on_the_front_of
+ont:on_the_front_of rdf:type owl:ObjectProperty ,
+                             owl:AsymmetricProperty ,
+                             owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#on_the_side_of
+ont:on_the_side_of rdf:type owl:ObjectProperty ,
+                            owl:AsymmetricProperty ,
+                            owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#on_top_of
+ont:on_top_of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ont:on ;
+              rdf:type owl:AsymmetricProperty ,
+                       owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#parked_on
+ont:parked_on rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ont:on ;
+              rdf:type owl:AsymmetricProperty ,
+                       owl:IrreflexiveProperty ;
+              rdfs:domain <http://example.invalid/ontologies/ont.owl#Vehicles> ;
+              rdfs:range <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://progetto-dl-sw.org/ontology#playing_with
+ont:playing_with rdf:type owl:ObjectProperty ,
+                          owl:IrreflexiveProperty ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#pulled_by
+ont:pulled_by rdf:type owl:ObjectProperty ;
+              owl:inverseOf ont:pulling ;
+              rdf:type owl:AsymmetricProperty ,
+                       owl:TransitiveProperty ,
+                       owl:IrreflexiveProperty ;
+              rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] ;
+              rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#pulling
+ont:pulling rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:TransitiveProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] ;
+            rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#reflected_in
+ont:reflected_in rdf:type owl:ObjectProperty ,
+                          owl:AsymmetricProperty ,
+                          owl:IrreflexiveProperty ;
+                 rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#riding
+ont:riding rdf:type owl:ObjectProperty ,
+                    owl:AsymmetricProperty ,
+                    owl:IrreflexiveProperty ;
+           rdfs:domain <http://example.invalid/ontologies/ont.owl#Person> ;
+           rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#riding_on
+ont:riding_on rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf ont:on ;
+              rdf:type owl:AsymmetricProperty ,
+                       owl:IrreflexiveProperty ;
+              rdfs:domain <http://example.invalid/ontologies/ont.owl#Person> ;
+              rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Person>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#sitting_at
+ont:sitting_at rdf:type owl:ObjectProperty ,
+                        owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#sitting_in
+ont:sitting_in rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:in ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#sitting_on
+ont:sitting_on rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:on ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                            <http://example.invalid/ontologies/ont.owl#Vehicles>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#standing_by
+ont:standing_by rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ont:near ;
+                rdf:type owl:SymmetricProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#standing_in
+ont:standing_in rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ont:in ;
+                rdf:type owl:AsymmetricProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#standing_next_to
+ont:standing_next_to rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf ont:near ;
+                     rdf:type owl:SymmetricProperty ,
+                              owl:IrreflexiveProperty ;
+                     rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#standing_on
+ont:standing_on rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf ont:on ;
+                rdf:type owl:AsymmetricProperty ,
+                         owl:IrreflexiveProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+                rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#surrounded_by
+ont:surrounded_by rdf:type owl:ObjectProperty ,
+                           owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#swinging
+ont:swinging rdf:type owl:ObjectProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+             rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Item>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#to_the_left_of
+ont:to_the_left_of rdf:type owl:ObjectProperty ;
+                   owl:inverseOf ont:to_the_right_of ;
+                   rdf:type owl:AsymmetricProperty ,
+                            owl:TransitiveProperty ,
+                            owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#to_the_right_of
+ont:to_the_right_of rdf:type owl:ObjectProperty ,
+                             owl:AsymmetricProperty ,
+                             owl:TransitiveProperty ,
+                             owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#touching
+ont:touching rdf:type owl:ObjectProperty ,
+                      owl:SymmetricProperty ,
+                      owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#under
+ont:under rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:TransitiveProperty ,
+                   owl:IrreflexiveProperty .
+
+
+###  http://progetto-dl-sw.org/ontology#using
+ont:using rdf:type owl:ObjectProperty ,
+                   owl:AsymmetricProperty ,
+                   owl:IrreflexiveProperty ;
+          rdfs:domain <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#walking_in
+ont:walking_in rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:in ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#walking_on
+ont:walking_on rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf ont:on ;
+               rdf:type owl:AsymmetricProperty ,
+                        owl:IrreflexiveProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Furniture>
+                                            <http://example.invalid/ontologies/ont.owl#Location>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#watching
+ont:watching rdf:type owl:ObjectProperty ,
+                      owl:IrreflexiveProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( <http://example.invalid/ontologies/ont.owl#Animals>
+                                            <http://example.invalid/ontologies/ont.owl#Person>
+                                              )
+                                ] .
+
+
+###  http://progetto-dl-sw.org/ontology#wearing
+ont:wearing rdf:type owl:ObjectProperty ,
+                     owl:AsymmetricProperty ,
+                     owl:IrreflexiveProperty ;
+            rdfs:domain <http://example.invalid/ontologies/ont.owl#Person> ;
+            rdfs:range <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#with
+ont:with rdf:type owl:ObjectProperty ,
+                  owl:TransitiveProperty ,
+                  owl:IrreflexiveProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://progetto-dl-sw.org/ontology#hasAttribute
+ont:hasAttribute rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.invalid/ontologies/ont.owl#Animals
+<http://example.invalid/ontologies/ont.owl#Animals> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#LivingBeing> .
+
+
+###  http://example.invalid/ontologies/ont.owl#ArchitecturalStructure
+<http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> rdf:type owl:Class ;
+                                                                   rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Beverages
+<http://example.invalid/ontologies/ont.owl#Beverages> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Substance> ;
+                                                      owl:disjointWith <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Bodypart
+<http://example.invalid/ontologies/ont.owl#Bodypart> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#LivingBeing> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Clothing
+<http://example.invalid/ontologies/ont.owl#Clothing> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#InanimateObject> .
+
+
+###  http://example.invalid/ontologies/ont.owl#FacilityElement
+<http://example.invalid/ontologies/ont.owl#FacilityElement> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Food
+<http://example.invalid/ontologies/ont.owl#Food> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Substance> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Furniture
+<http://example.invalid/ontologies/ont.owl#Furniture> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#InanimateObject> .
+
+
+###  http://example.invalid/ontologies/ont.owl#InanimateObject
+<http://example.invalid/ontologies/ont.owl#InanimateObject> rdf:type owl:Class .
+
+
+###  http://example.invalid/ontologies/ont.owl#IndoorSpace
+<http://example.invalid/ontologies/ont.owl#IndoorSpace> rdf:type owl:Class ;
+                                                        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Item
+<http://example.invalid/ontologies/ont.owl#Item> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#InanimateObject> .
+
+
+###  http://example.invalid/ontologies/ont.owl#LivingBeing
+<http://example.invalid/ontologies/ont.owl#LivingBeing> rdf:type owl:Class .
+
+
+###  http://example.invalid/ontologies/ont.owl#Location
+<http://example.invalid/ontologies/ont.owl#Location> rdf:type owl:Class .
+
+
+###  http://example.invalid/ontologies/ont.owl#Nature
+<http://example.invalid/ontologies/ont.owl#Nature> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#LivingBeing> .
+
+
+###  http://example.invalid/ontologies/ont.owl#OutdoorSpace
+<http://example.invalid/ontologies/ont.owl#OutdoorSpace> rdf:type owl:Class ;
+                                                         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Location> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Person
+<http://example.invalid/ontologies/ont.owl#Person> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#LivingBeing> .
+
+
+###  http://example.invalid/ontologies/ont.owl#SportsEquipment
+<http://example.invalid/ontologies/ont.owl#SportsEquipment> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#InanimateObject> .
+
+
+###  http://example.invalid/ontologies/ont.owl#Substance
+<http://example.invalid/ontologies/ont.owl#Substance> rdf:type owl:Class .
+
+
+###  http://example.invalid/ontologies/ont.owl#Vehicles
+<http://example.invalid/ontologies/ont.owl#Vehicles> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#InanimateObject> .
+
+
+###  http://progetto-dl-sw.org/ontology#Air
+ont:Air rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Airplane
+ont:Airplane rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Animal
+ont:Animal rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Apple
+ont:Apple rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Arm
+ont:Arm rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Arrow
+ont:Arrow rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Backpack
+ont:Backpack rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bag
+ont:Bag rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Balcony
+ont:Balcony rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ball
+ont:Ball rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Banana
+ont:Banana rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bananas
+ont:Bananas rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Basket
+ont:Basket rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bat
+ont:Bat rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bathroom
+ont:Bathroom rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#IndoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Beach
+ont:Beach rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Beak
+ont:Beak rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bear
+ont:Bear rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Beard
+ont:Beard rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bed
+ont:Bed rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Belt
+ont:Belt rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bench
+ont:Bench rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bicycle
+ont:Bicycle rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bike
+ont:Bike rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bird
+ont:Bird rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Blanket
+ont:Blanket rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Boat
+ont:Boat rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Book
+ont:Book rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Books
+ont:Books rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Boot
+ont:Boot rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Boots
+ont:Boots rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bottle
+ont:Bottle rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bowl
+ont:Bowl rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Box
+ont:Box rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Boy
+ont:Boy rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bracelet
+ont:Bracelet rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Branch
+ont:Branch rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Branches
+ont:Branches rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bread
+ont:Bread rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bricks
+ont:Bricks rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bridge
+ont:Bridge rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Broccoli
+ont:Broccoli rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Building
+ont:Building rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Buildings
+ont:Buildings rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bus
+ont:Bus rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bush
+ont:Bush rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Bushes
+ont:Bushes rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cabinet
+ont:Cabinet rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cake
+ont:Cake rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Camera
+ont:Camera rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Can
+ont:Can rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Candle
+ont:Candle rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cap
+ont:Cap rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Car
+ont:Car rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Carpet
+ont:Carpet rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Carrot
+ont:Carrot rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cars
+ont:Cars rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cat
+ont:Cat rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ceiling
+ont:Ceiling rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cellphone
+ont:Cellphone rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Chain
+ont:Chain rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Chair
+ont:Chair rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cheese
+ont:Cheese rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Child
+ont:Child rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Clock
+ont:Clock rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Clothes
+ont:Clothes rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cloud
+ont:Cloud rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Clouds
+ont:Clouds rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Coat
+ont:Coat rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Collar
+ont:Collar rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Computer
+ont:Computer rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Computermouse
+ont:Computermouse rdf:type owl:Class ;
+                  rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cone
+ont:Cone rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Container
+ont:Container rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cord
+ont:Cord rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Couch
+ont:Couch rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Counter
+ont:Counter rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cow
+ont:Cow rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Cup
+ont:Cup rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Curtain
+ont:Curtain rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Desk
+ont:Desk rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Dirt
+ont:Dirt rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Dish
+ont:Dish rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Dog
+ont:Dog rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Donut
+ont:Donut rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Door
+ont:Door rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Doors
+ont:Doors rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Drawer
+ont:Drawer rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Dress
+ont:Dress rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ear
+ont:Ear rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ears
+ont:Ears rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Elephant
+ont:Elephant rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Eye
+ont:Eye rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Eyes
+ont:Eyes rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Face
+ont:Face rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Faucet
+ont:Faucet rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Feet
+ont:Feet rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Fence
+ont:Fence rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Field
+ont:Field rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Finger
+ont:Finger rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Firehydrant
+ont:Firehydrant rdf:type owl:Class ;
+                rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Flag
+ont:Flag rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Floor
+ont:Floor rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Flower
+ont:Flower rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Flowers
+ont:Flowers rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Food
+ont:Food rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Foot
+ont:Foot rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Fork
+ont:Fork rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Frame
+ont:Frame rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Frisbee
+ont:Frisbee rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Fruit
+ont:Fruit rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Fur
+ont:Fur rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Gate
+ont:Gate rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Giraffe
+ont:Giraffe rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Girl
+ont:Girl rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Glass
+ont:Glass rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Glasses
+ont:Glasses rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Glove
+ont:Glove rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Gloves
+ont:Gloves rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Goggles
+ont:Goggles rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Graffiti
+ont:Graffiti rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Grass
+ont:Grass rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Gravel
+ont:Gravel rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ground
+ont:Ground rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Guy
+ont:Guy rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Hair
+ont:Hair rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Hand
+ont:Hand rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Hands
+ont:Hands rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Hat
+ont:Hat rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Head
+ont:Head rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Helmet
+ont:Helmet rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Hill
+ont:Hill rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Horn
+ont:Horn rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Horns
+ont:Horns rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Horse
+ont:Horse rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#House
+ont:House rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Jacket
+ont:Jacket rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Jeans
+ont:Jeans rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Jersey
+ont:Jersey rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Keyboard
+ont:Keyboard rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Kitchen
+ont:Kitchen rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#IndoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Kite
+ont:Kite rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Knife
+ont:Knife rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Label
+ont:Label rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Lady
+ont:Lady rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Lamp
+ont:Lamp rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Laptop
+ont:Laptop rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Leaf
+ont:Leaf rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Leaves
+ont:Leaves rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Leg
+ont:Leg rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Legs
+ont:Legs rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Letter
+ont:Letter rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Letters
+ont:Letters rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Licenseplate
+ont:Licenseplate rdf:type owl:Class ;
+                 rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Lid
+ont:Lid rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Logo
+ont:Logo rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Luggage
+ont:Luggage rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Man
+ont:Man rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Mane
+ont:Mane rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Meat
+ont:Meat rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Mirror
+ont:Mirror rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Motorcycle
+ont:Motorcycle rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Mountain
+ont:Mountain rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Mountains
+ont:Mountains rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Mouth
+ont:Mouth rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Napkin
+ont:Napkin rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Neck
+ont:Neck rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Necklace
+ont:Necklace rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Net
+ont:Net rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Nose
+ont:Nose rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Number
+ont:Number rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Numbers
+ont:Numbers rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ocean
+ont:Ocean rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Onion
+ont:Onion rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Orange
+ont:Orange rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Outlet
+ont:Outlet rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Paint
+ont:Paint rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Palmtree
+ont:Palmtree rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pants
+ont:Pants rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Paper
+ont:Paper rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Park
+ont:Park rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Parkinglot
+ont:Parkinglot rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pavement
+ont:Pavement rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Paw
+ont:Paw rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#People
+ont:People rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pepper
+ont:Pepper rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Person
+ont:Person rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Phone
+ont:Phone rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Picture
+ont:Picture rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pillow
+ont:Pillow rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pipe
+ont:Pipe rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pizza
+ont:Pizza rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Plant
+ont:Plant rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Plants
+ont:Plants rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Plate
+ont:Plate rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Platform
+ont:Platform rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Player
+ont:Player rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pocket
+ont:Pocket rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pole
+ont:Pole rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Post
+ont:Post rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Pot
+ont:Pot rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Purse
+ont:Purse rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Racket
+ont:Racket rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Refrigerator
+ont:Refrigerator rdf:type owl:Class ;
+                 rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Remotecontrol
+ont:Remotecontrol rdf:type owl:Class ;
+                  rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ring
+ont:Ring rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Road
+ont:Road rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Rock
+ont:Rock rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Rocks
+ont:Rocks rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Roof
+ont:Roof rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Room
+ont:Room rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#IndoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Rope
+ont:Rope rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Rug
+ont:Rug rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sand
+ont:Sand rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sauce
+ont:Sauce rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Scarf
+ont:Scarf rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Scene
+ont:Scene rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Screen
+ont:Screen rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Seat
+ont:Seat rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sheep
+ont:Sheep rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shelf
+ont:Shelf rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shirt
+ont:Shirt rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shoe
+ont:Shoe rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shoes
+ont:Shoes rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shore
+ont:Shore rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Shorts
+ont:Shorts rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sidewalk
+ont:Sidewalk rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sign
+ont:Sign rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sink
+ont:Sink rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Skateboard
+ont:Skateboard rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Ski
+ont:Ski rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Skirt
+ont:Skirt rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Skis
+ont:Skis rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sky
+ont:Sky rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sneakers
+ont:Sneakers rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Snow
+ont:Snow rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Snowboard
+ont:Snowboard rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sock
+ont:Sock rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Socks
+ont:Socks rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Spoon
+ont:Spoon rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Spots
+ont:Spots rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Stairs
+ont:Stairs rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Statue
+ont:Statue rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Stick
+ont:Stick rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sticker
+ont:Sticker rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Stone
+ont:Stone rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Street
+ont:Street rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Streetlight
+ont:Streetlight rdf:type owl:Class ;
+                rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Streetsign
+ont:Streetsign rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Suit
+ont:Suit rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Suitcase
+ont:Suitcase rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Surfboard
+ont:Surfboard rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#SportsEquipment> .
+
+
+###  http://progetto-dl-sw.org/ontology#Sweater
+ont:Sweater rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#T-shirt
+ont:T-shirt rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Table
+ont:Table rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tag
+ont:Tag rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tail
+ont:Tail rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Television
+ont:Television rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Furniture> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tie
+ont:Tie rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tiles
+ont:Tiles rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tire
+ont:Tire rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Toilet
+ont:Toilet rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#IndoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tomato
+ont:Tomato rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Towel
+ont:Towel rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tower
+ont:Tower rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure> .
+
+
+###  http://progetto-dl-sw.org/ontology#Trafficlight
+ont:Trafficlight rdf:type owl:Class ;
+                 rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Train
+ont:Train rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Traintracks
+ont:Traintracks rdf:type owl:Class ;
+                rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#OutdoorSpace> .
+
+
+###  http://progetto-dl-sw.org/ontology#Trashcan
+ont:Trashcan rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tray
+ont:Tray rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Tree
+ont:Tree rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Trees
+ont:Trees rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Treetrunk
+ont:Treetrunk rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Truck
+ont:Truck rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Trunk
+ont:Trunk rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Nature> .
+
+
+###  http://progetto-dl-sw.org/ontology#Umbrella
+ont:Umbrella rdf:type owl:Class ;
+             rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Uniform
+ont:Uniform rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Van
+ont:Van rdf:type owl:Class ;
+        rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Vase
+ont:Vase rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Vegetable
+ont:Vegetable rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Vegetables
+ont:Vegetables rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Food> .
+
+
+###  http://progetto-dl-sw.org/ontology#Vehicle
+ont:Vehicle rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Vehicles> .
+
+
+###  http://progetto-dl-sw.org/ontology#Vest
+ont:Vest rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wall
+ont:Wall rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Watch
+ont:Watch rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Water
+ont:Water rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Beverages> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wetsuit
+ont:Wetsuit rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wheel
+ont:Wheel rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wheels
+ont:Wheels rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Window
+ont:Window rdf:type owl:Class ;
+           rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Windows
+ont:Windows rdf:type owl:Class ;
+            rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#FacilityElement> .
+
+
+###  http://progetto-dl-sw.org/ontology#Windshield
+ont:Windshield rdf:type owl:Class ;
+               rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wing
+ont:Wing rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wire
+ont:Wire rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wires
+ont:Wires rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Woman
+ont:Woman rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Person> .
+
+
+###  http://progetto-dl-sw.org/ontology#Word
+ont:Word rdf:type owl:Class ;
+         rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Words
+ont:Words rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Item> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wrist
+ont:Wrist rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Bodypart> .
+
+
+###  http://progetto-dl-sw.org/ontology#Wristband
+ont:Wristband rdf:type owl:Class ;
+              rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Clothing> .
+
+
+###  http://progetto-dl-sw.org/ontology#Zebra
+ont:Zebra rdf:type owl:Class ;
+          rdfs:subClassOf <http://example.invalid/ontologies/ont.owl#Animals> .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://example.invalid/ontologies/ont.owl#Animals>
+                <http://example.invalid/ontologies/ont.owl#Bodypart>
+                <http://example.invalid/ontologies/ont.owl#Nature>
+                <http://example.invalid/ontologies/ont.owl#Person>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://example.invalid/ontologies/ont.owl#ArchitecturalStructure>
+                <http://example.invalid/ontologies/ont.owl#FacilityElement>
+                <http://example.invalid/ontologies/ont.owl#IndoorSpace>
+                <http://example.invalid/ontologies/ont.owl#OutdoorSpace>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://example.invalid/ontologies/ont.owl#Clothing>
+                <http://example.invalid/ontologies/ont.owl#Furniture>
+                <http://example.invalid/ontologies/ont.owl#Item>
+                <http://example.invalid/ontologies/ont.owl#SportsEquipment>
+                <http://example.invalid/ontologies/ont.owl#Vehicles>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://example.invalid/ontologies/ont.owl#InanimateObject>
+                <http://example.invalid/ontologies/ont.owl#LivingBeing>
+                <http://example.invalid/ontologies/ont.owl#Location>
+                <http://example.invalid/ontologies/ont.owl#Substance>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

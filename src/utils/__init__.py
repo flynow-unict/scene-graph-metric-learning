@@ -1,0 +1,1 @@
+"""Funzioni di supporto condivise."""

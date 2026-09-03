@@ -1,0 +1,52 @@
+# Ambiente conda del progetto.
+#
+#   conda env create -f environment.yml
+#   conda activate dl-scene-retrieval
+#
+# PyTorch e' installato via pip perche' la variante da usare dipende
+# dall'hardware: la riga sotto e' quella CPU/Metal. Per le GPU:
+#   NVIDIA -> pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+#   AMD    -> pip install torch torchvision --index-url https://download.pytorch.org/whl/rocm6.1
+# Sul cluster GPU l'ambiente arriva gia' pronto dal container Apptainer.
+name: dl-scene-retrieval
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.11
+  - pip=25.2
+
+  # Retrieval: faiss e' distribuito solo su conda-forge
+  - faiss-cpu=1.9.0
+
+  - pip:
+      # Deep learning
+      - torch==2.12.1
+      - torchvision==0.27.1
+      - torch-geometric==2.8.0
+
+      # Calcolo numerico e immagini
+      - numpy==2.4.6
+      - pillow==12.2.0
+      - scikit-learn==1.9.0
+      - networkx==3.6.1
+
+      # Embedding testuali dei nodi e delle relazioni (NOMIC)
+      - transformers==5.12.1
+      - sentence-transformers==5.6.0
+
+      # Knowledge graph su Virtuoso
+      - SPARQLWrapper==2.0.0
+      - pandas==2.3.2
+      - requests==2.34.2
+
+      # Configurazione degli esperimenti, logging e grafici
+      - PyYAML==6.0.3
+      - tqdm==4.68.3
+      - matplotlib==3.10.6
+      - wandb==0.22.2
+
+      # Demo interattiva del knowledge graph
+      - streamlit==1.50.0

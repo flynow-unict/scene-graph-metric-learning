@@ -1,0 +1,16 @@
+# Quarta cella della griglia: architettura edge-aware e loss Triplet.
+data: data/sceneGraph/fullset/semantic/embedded/train_scene_graphs.pt
+conv: gine
+loss: triplet
+positives: mixed
+triplet_mining: semi
+margin: 0.3
+epochs: 300
+batch_size: 128
+lr: 0.001
+dropout: 0.3
+pool: mean
+min_sim: 0.15
+pos_k: 5
+sem_veto: 0.55
+out: data/models/fullset/checkpoints/gcn_encoder_gine_triplet.pth

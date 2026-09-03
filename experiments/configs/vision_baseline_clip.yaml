@@ -1,0 +1,7 @@
+# Baseline puramente visiva: encoder immagine di CLIP, pretrained e congelato.
+encoder: clip
+split: test_gallery
+images_dir: data/images/fullset/VectorDB
+batch_size: 64
+workers: 4
+out: data/models/fullset/vision_baselines/clip_test_gallery.pt

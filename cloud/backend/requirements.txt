@@ -1,0 +1,10 @@
+
+fastapi
+uvicorn
+pydantic
+pika
+redis
+psycopg2-binary
+sqlmodel
+python-multipart
+dotenv

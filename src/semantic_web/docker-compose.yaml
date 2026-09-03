@@ -1,0 +1,16 @@
+services:
+  virtuoso_adv:
+    image: openlink/virtuoso-opensource-7
+    container_name: virtuoso_advanced
+    ports:
+      - "1114:1111"
+      - "8893:8890"
+    environment:
+      - VIRT_Parameters_DirsAllowed=/data, ., ../vad, /usr/share/proj
+      - DBA_PASSWORD=santi_semweb_2026
+    volumes:
+      - ./virtuoso/share:/data
+      - virtuoso_db_advanced:/database
+
+volumes:
+  virtuoso_db_advanced:

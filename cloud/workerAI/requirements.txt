@@ -1,0 +1,10 @@
+pika
+python-dotenv
+sqlmodel
+psycopg2-binary
+redis
+paramiko
+scp
+Pillow
+transformers
+faiss-cpu
