@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Informazioni su gruppo e progetto
-- **Group ID**: Fly Now
+- **Group ID**: FlyNow
 - **Project ID**: 26
 
 ## Descrizione del progetto

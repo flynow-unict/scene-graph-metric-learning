@@ -1,6 +1,6 @@
 # Graph-based Metric Learning for Scene Understanding with Semantic Web Technologies
 
-- **Group ID**: Fly Now
+- **Group ID**: FlyNow
 - **Project ID**: 26
 - **Componenti del gruppo**: Santi Lisi, Francesco Granata, Dario Lazzara
 

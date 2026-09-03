@@ -1,0 +1,65 @@
+# ---------------------------------------------------------------
+# Dati e modelli
+# ---------------------------------------------------------------
+# Il dataset non sta su GitHub (vedi data/README.md per il link al Drive).
+# Della cartella data/ si tracciano solo la struttura e la documentazione.
+data/**
+!data/**/
+!data/**/.gitkeep
+!data/**/README.md
+!data/README.md
+
+# Cartella del vecchio layout, sostituita da data/models/<corpus>/vision_baselines/
+data/baseline/
+
+*.pt
+*.pth
+*.index
+*.npy
+*.zip
+
+# Checkpoint dei training locali
+checkpoints/
+
+# ---------------------------------------------------------------
+# Esperimenti
+# ---------------------------------------------------------------
+experiments/logs/**
+!experiments/logs/.gitkeep
+
+# ---------------------------------------------------------------
+# Documentazione e risultati
+# ---------------------------------------------------------------
+# I grafici prodotti dagli script di valutazione fanno parte della relazione e
+# vanno tracciati, anche se sono .png.
+!figures/**
+
+# Appunti personali dei singoli membri del gruppo: mai committati.
+notes/
+relazione/
+slides/
+
+# ---------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.env
+.venv/
+env/
+venv/
+*.egg-info/
+
+# ---------------------------------------------------------------
+# Sistema e IDE
+# ---------------------------------------------------------------
+.DS_Store
+.idea/
+.vscode/
+
+# ---------------------------------------------------------------
+# Varie
+# ---------------------------------------------------------------
+# Wheel offline per l'installazione sul cluster senza rete
+wheels/
+similarity_examples/
